@@ -66,7 +66,7 @@ export default function RaspberryPi({ onSelect, hoveredKey: _hoveredKey }) {
 
   return (
     <group ref={group} position={[0, 0, 0]}>
-      {/* The GLB itself: centered, uniformly scaled, slightly tilted up */}
+      {/* The GLB itself: centered, uniformly scaled */}
       {ready && (
         <group scale={modelScale}>
           <primitive
@@ -77,58 +77,58 @@ export default function RaspberryPi({ onSelect, hoveredKey: _hoveredKey }) {
       )}
 
       {/* ===== Hotspots (clickable) =====
-          Positions tuned to sit above the equivalent components on the board.
-          If the GLB is rotated differently, tweak X/Z here only. */}
+          Positions mirrored (X and Z negated) so they align with the GLB's
+          actual port/component sides. */}
       <Hotspot
-        position={[-0.3, topY + 0.25, -0.1]}
+        position={[0.3, topY + 0.25, 0.1]}
         componentKey="cpu"
         label="CPU"
         onSelect={onSelect}
       />
       <Hotspot
-        position={[-0.6, topY + 0.55, 2.35]}
+        position={[0.6, topY + 0.55, -2.35]}
         componentKey="gpio"
         label="GPIO"
         onSelect={onSelect}
       />
       <Hotspot
-        position={[3.45, topY + 1.35, -0.95]}
+        position={[-3.45, topY + 1.35, 0.95]}
         componentKey="usb"
         label="USB 2.0"
         onSelect={onSelect}
       />
       <Hotspot
-        position={[3.45, topY + 1.35, 1.55]}
+        position={[-3.45, topY + 1.35, -1.55]}
         componentKey="ethernet"
         label="Ethernet"
         onSelect={onSelect}
       />
       <Hotspot
-        position={[-0.4, topY + 0.6, -2.55]}
+        position={[0.4, topY + 0.6, 2.55]}
         componentKey="hdmi"
         label="HDMI"
         onSelect={onSelect}
       />
       <Hotspot
-        position={[-3.25, topY + 0.45, -2.55]}
+        position={[3.25, topY + 0.45, 2.55]}
         componentKey="power"
         label="Power"
         onSelect={onSelect}
       />
       <Hotspot
-        position={[-3.5, -topY - 0.2, 0]}
+        position={[3.5, -topY - 0.2, 0]}
         componentKey="microsd"
         label="microSD"
         onSelect={onSelect}
       />
       <Hotspot
-        position={[-3.1, topY + 0.35, 1.25]}
+        position={[3.1, topY + 0.35, -1.25]}
         componentKey="wifi"
         label="Wi-Fi/BT"
         onSelect={onSelect}
       />
       <Hotspot
-        position={[2.55, topY + 0.65, -2.55]}
+        position={[-2.55, topY + 0.65, 2.55]}
         componentKey="audio"
         label="3.5mm A/V"
         onSelect={onSelect}
