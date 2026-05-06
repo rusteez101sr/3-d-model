@@ -44,6 +44,9 @@ jobs:
           CI: "false"
         run: yarn build
 
+      - name: Disable Jekyll
+        run: touch frontend/build/.nojekyll
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -62,4 +65,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
