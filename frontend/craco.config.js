@@ -82,7 +82,10 @@ webpackConfig.devServer = (devServerConfig) => {
 };
 
 // Wrap with visual edits (automatically adds babel plugin, dev server, and overlay in dev mode)
-if (isDevServer) {
+// Disabled for this app: the babel plugin injects JSX attributes (x-line-number, etc.)
+// that conflict with @react-three/fiber primitive elements which forward unknown props
+// to three.js objects, throwing "Cannot set x-line-number" runtime errors.
+if (isDevServer && process.env.DISABLE_VISUAL_EDITS !== "true") {
   try {
     const { withVisualEdits } = require("@emergentbase/visual-edits/craco");
     webpackConfig = withVisualEdits(webpackConfig);

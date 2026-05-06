@@ -1,52 +1,55 @@
-import { useEffect } from "react";
+import { useState } from "react";
+import PiScene from "./components/pi3d/PiScene";
+import SpecsPanel from "./components/panels/SpecsPanel";
+import HistoryPanel from "./components/panels/HistoryPanel";
+import ImplementationsPanel from "./components/panels/ImplementationsPanel";
+import ComponentDetail from "./components/panels/ComponentDetail";
+import TopBar, { BottomBar } from "./components/panels/TopBar";
+import Hero from "./components/panels/Hero";
 import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
-
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
-  return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
-  );
-};
 
 function App() {
+  const [active, setActive] = useState(null);
+
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+    <div
+      data-testid="landing-root"
+      className="relative h-screen w-screen overflow-hidden bg-[#030712] text-white"
+      style={{ fontFamily: "Inter, sans-serif" }}
+    >
+      {/* Radial vignette */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 40%, rgba(0,46,74,0.55) 0%, rgba(3,7,18,1) 70%)",
+        }}
+      />
+      {/* Subtle noise / grain */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.06] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.6'/></svg>\")",
+        }}
+      />
+
+      {/* 3D scene */}
+      <div className="absolute inset-0 z-[1]">
+        <PiScene onSelect={setActive} />
+      </div>
+
+      {/* UI overlays */}
+      <TopBar />
+      <Hero />
+      <SpecsPanel />
+      <HistoryPanel />
+      <ImplementationsPanel />
+      <ComponentDetail
+        componentKey={active}
+        onClose={() => setActive(null)}
+      />
+      <BottomBar />
     </div>
   );
 }
