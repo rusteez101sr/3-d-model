@@ -19,6 +19,13 @@ node_modules/
 # Testing
 /coverage
 
+# Environment variables
+.env
+
+# GitHub CLI config
+.config/
+.local/
+
 # Next.js
 /.next/
 /out/
