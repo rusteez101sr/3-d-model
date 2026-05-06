@@ -1,0 +1,105 @@
+{
+  "theme": "Dark",
+  "archetype": "Archetype 5 (Jewel & Luxury) with Tech Museum Variant",
+  "emotions": [
+    "Premium",
+    "Educational",
+    "Cinematic",
+    "Precise",
+    "High-Tech"
+  ],
+  "colors": {
+    "background": {
+      "primary": "#030712",
+      "secondary": "#0A0F1C",
+      "accent": "#00F0FF"
+    },
+    "surface": {
+      "glass": "bg-black/40",
+      "glass_solid": "bg-slate-950/80",
+      "border": "border-white/10"
+    },
+    "text": {
+      "primary": "#F8FAFC",
+      "secondary": "#94A3B8",
+      "accent": "#00F0FF"
+    },
+    "status": {
+      "success": "#10B981",
+      "warning": "#F59E0B",
+      "error": "#EF4444"
+    }
+  },
+  "typography": {
+    "heading_font": "Outfit, sans-serif",
+    "body_font": "Inter, sans-serif",
+    "mono_font": "JetBrains Mono, monospace",
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl tracking-tighter font-light text-white",
+      "h2": "text-2xl sm:text-3xl tracking-tight text-white",
+      "h3": "text-lg sm:text-xl font-medium text-slate-200",
+      "body": "text-base leading-relaxed text-slate-400",
+      "mono_label": "text-xs tracking-[0.2em] uppercase font-mono text-cyan-400"
+    }
+  },
+  "layout_and_spacing": {
+    "spacing_scale": "Generous spacing. p-6 or p-8 inside floating panels.",
+    "container": "w-screen h-screen overflow-hidden relative bg-slate-950"
+  },
+  "components": {
+    "panels": {
+      "style": "Holographic Glassmorphism: bg-black/50 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] rounded-2xl p-6.",
+      "left_panel": "Description & Specs. Positioned absolutely on the left of the screen (e.g. left-8 top-1/2 -translate-y-1/2 w-80).",
+      "top_panel": "History. Positioned top/center (e.g. top-8 left-1/2 -translate-x-1/2 w-96).",
+      "right_panel": "Popular Implementations. Positioned right of the screen (e.g. right-8 top-1/2 -translate-y-1/2 w-80).",
+      "animation": "Framer Motion. Fade in and slight Y-axis translation on mount."
+    },
+    "hotspots": {
+      "marker_style": "Pulsing cyan ring/dot using @react-three/drei Html component. Use a tiny div with animate-ping.",
+      "modal_style": "Tiny glassmorphism tooltip attached to the hotspot: bg-black/80 backdrop-blur-md border border-cyan-500/30 p-4 rounded-xl text-sm w-48.",
+      "interaction": "On pointer over: trigger 3D component material emissive color to cyan. On click: expand the HTML detail modal."
+    },
+    "raspberry_pi_3d": {
+      "structure": "Procedurally generated using Three.js primitives (Box, Cylinder).",
+      "board": "Dark green/black PCB material.",
+      "components": "Silver/Grey metallic materials for CPU, USB, HDMI, Ethernet ports. Black headers for GPIO."
+    }
+  },
+  "animations": {
+    "3d_scene": "Continuous slow rotation (OrbitControls with autoRotate).",
+    "floor": "Pulsing/moving texture effect on the circuit floor grid."
+  },
+  "dependencies_to_add": [
+    "three",
+    "@react-three/fiber",
+    "@react-three/drei",
+    "framer-motion",
+    "lucide-react"
+  ],
+  "media": {
+    "images": [
+      {
+        "url": "https://static.prod-images.emergentagent.com/jobs/11ac5f72-69b3-4c8a-bd87-023fe00756ef/images/ee5f13e05186523396855a410f1351b2fca8996ef66138535b5a51c5d9698551.png",
+        "description": "Subtle glowing neon cyan circuit board floor texture",
+        "category": "3d_environment_floor_texture"
+      },
+      {
+        "url": "https://static.prod-images.emergentagent.com/jobs/11ac5f72-69b3-4c8a-bd87-023fe00756ef/images/9ddb845e11e49a07c2f9d82d1373aa3200bc313c8553db95838ceae5dec29960.png",
+        "description": "Dark futuristic tech background for overall app fallback background",
+        "category": "app_fallback_background"
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Install 'three', '@react-three/fiber', '@react-three/drei', and 'framer-motion'.",
+    "Build the hero scene inside a full-screen <Canvas> container.",
+    "Procedurally generate the Raspberry Pi 3 Model B using basic R3F primitives (<Box>, <Cylinder>). Create a main board (PCB) and place components (GPIO, CPU, USB, HDMI, Ethernet, microSD, WiFi, Power) on top at accurate relative positions.",
+    "Add 'Html' components from '@react-three/drei' attached to specific 3D coordinates on the board to act as clickable hotspots.",
+    "When a hotspot is hovered, update the material of that specific 3D primitive to glow (emissive cyan).",
+    "When a hotspot is clicked, display a detail modal (either inside the Html component or via a React state driving a 2D overlay).",
+    "Implement the floor grid using a <Plane> with the provided '3d_environment_floor_texture' as a map or emissiveMap.",
+    "Set up cinematic three-point lighting (ambient light, directional light, and a cyan point light). You can also use <Environment preset='city'>.",
+    "Position the 3 holographic UI panels (Specs, History, Implementations) as absolute DOM overlays sitting on top of the Canvas, styled with the Glassmorphism properties provided.",
+    "Ensure all interactive elements have a 'data-testid' attribute (e.g., data-testid='hotspot-cpu', data-testid='panel-history')."
+  ]
+}
