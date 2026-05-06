@@ -28,21 +28,18 @@ jobs:
           cache: yarn
           cache-dependency-path: frontend/yarn.lock
 
-      - name: Enable Corepack
-        run: corepack enable
-
       - name: Use Yarn 1.22.22
         run: corepack prepare yarn@1.22.22 --activate
 
       - name: Install dependencies
         working-directory: frontend
-        run: yarn install --frozen-lockfile
+        run: corepack yarn install --frozen-lockfile
 
       - name: Build
         working-directory: frontend
         env:
           CI: "false"
-        run: yarn build
+        run: corepack yarn build
 
       - name: Disable Jekyll
         run: touch frontend/build/.nojekyll
